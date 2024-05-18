@@ -1,0 +1,12 @@
+{
+  "name": "jimmy",
+  "version": "0.1.0",
+  "description": "AI enabled debugging",
+  "author": "435vic",
+  "license": "ISC",
+  "workspaces": [
+    "back",
+    "front",
+    "common"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "name": "@jimmy/front",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "435vic",
+  "license": "ISC"
+}
