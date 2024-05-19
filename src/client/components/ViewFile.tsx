@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import JSZip from "jszip";
+import React, { useState, useEffect } from "react";
+import { socket } from '../socket';
 
 interface ViewFileProps {
-    fileData: JSZip.JSZipObject[] | null;
+    fileData: { name: string, data: Uint8Array }[] | null;
 }
 
 const ViewFile = ({ fileData }: ViewFileProps) => {
     const [inputValue, setInputValue] = useState("");
+
+    useEffect(() => {
+        console.log(socket.connected);
+    }, []);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
