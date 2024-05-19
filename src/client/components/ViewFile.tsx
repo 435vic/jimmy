@@ -40,12 +40,12 @@ const ViewFile = ({ fileData }: ViewFileProps) => {
                 </div>)}
             </div>
             <div className="file-view">
+                <div className="chat"></div>
                 <div className="input-box">
                     <input className="input" type="text" value={inputValue} onChange={handleInputChange}></input>
                     <div className="send" onClick={handleSendClick}></div>
                 </div>
             </div>
-            <div className="debug"></div>
         </div>
     )
 };
