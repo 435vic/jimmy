@@ -7,6 +7,12 @@
   "workspaces": [
     "back",
     "front",
-    "common"
-  ]
+    "lib"
+  ],
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "tsx": "^4.10.5"
+  }
 }
