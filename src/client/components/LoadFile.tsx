@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import ViewFile from './ViewFile';
-import JSZip from 'jszip';
+import zlib from 'pako';
+// @ts-ignore
+import untar from 'js-untar';
 
 const LoadFile = () => {
-    const [contextFiles, setContextFiles] = useState<JSZip.JSZipObject[] | null>(null);
+    const [contextFiles, setContextFiles] = useState<{ name: string, data: Uint8Array }[] | null>(null);
 
     function handleDragOver(event: React.DragEvent<HTMLDivElement>) {
         event.preventDefault();
@@ -12,16 +14,21 @@ const LoadFile = () => {
       event.preventDefault();
       const files = event.dataTransfer.files;
     
-      if (files.length === 1 && files[0].name.endsWith('.zip')) {
+      if (files.length === 1 && files[0].name.endsWith('.tar.gz')) {
         const zipFile = files[0];
     
         if (zipFile.size <= 10 * 1024 * 1024) {
           try {
             const data = await zipFile.arrayBuffer();
-            const zip = new JSZip();
-            await zip.loadAsync(data);
-            setContextFiles(Object.values(zip.files))
-            console.log(Object.values(zip.files));
+            const pendingFiles = (await untar(zlib.inflate(data).buffer) as any[])
+              .filter((f: any) => f.type === '0')
+              .map(async (f: any) => ({
+                name: f.name as string,
+                data: new Uint8Array(await (f.blob as Blob).arrayBuffer())
+              }));
+            const files = await Promise.all(pendingFiles);
+            setContextFiles(files);
+            console.log(files);
             const formData = new FormData();
             formData.append('file', zipFile);
     
