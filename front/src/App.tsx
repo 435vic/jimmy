@@ -1,6 +1,7 @@
 
 import './App.css'
 import LoadFile from './components/LoadFile';
+import ViewFile from './components/ViewFile';
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
           <div className='title'>Jimmy</div>
           <div className='subtitle'>Tu debugger de confianza</div>
         </div>
-        <LoadFile/>
+        <ViewFile/>
       </div>
     </>
   )

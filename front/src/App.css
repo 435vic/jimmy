@@ -110,7 +110,7 @@
 .view-box {
   width: 20vw;
   height: 100%;
-  background-color: #0B2447;
+  background-color: #19376D;
 
   color: #A5D7E8;
 } .view-box p {
@@ -119,6 +119,42 @@
 .file-view {
   flex: 1;
   background: #576CBC;
+  display: flex;
+  flex-direction: column;
+} .file-view pre {
+  flex: 1;
+} .file-view .input-box {
+  width: 100%;
+  min-height: 15%;
+  background: #0B2447;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} .file-view .input {
+  padding: 0 10px 0 10px;
+  width: 85%;
+  height: 80%;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  background: #A5D7E8;
+  border-radius: 50px;
+  border: transparent solid 1px;
+
+  color: #0B2447;
+} .file-view .send {
+  height: 80%;
+  aspect-ratio: 1/1;
+
+  background: #576CBC;
+  border-radius: 100%;
+
+  margin-left: 10px;
+} .file-view .send:hover {
+  background: #19376D;
 }
 .debug {
   width: 20vw;
