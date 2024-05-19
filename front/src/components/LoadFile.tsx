@@ -3,6 +3,7 @@ import ViewFile from './ViewFile';
 
 const LoadFile: React.FC = () => {
     const [viewFile, setViewFile] = useState(false);
+    const [fileData, setFileData] = useState<any>(null);
 
     function handleDragOver(event: React.DragEvent<HTMLDivElement>) {
         event.preventDefault();
@@ -25,7 +26,9 @@ const LoadFile: React.FC = () => {
             });
     
             if (response.ok) {
+              const data = await response.json();
               console.log('Archivo .zip subido exitosamente');
+              setFileData(data);
               setViewFile(true);
             } else {
               console.error('Error al subir el archivo .zip:', response.statusText);
@@ -43,7 +46,7 @@ const LoadFile: React.FC = () => {
 
     return (
         <div className="content">
-            {viewFile ? <ViewFile /> : (
+            {viewFile ? <ViewFile fileData={fileData}/> : (
             <div className='background-load'>
                 <div className="loadFile" onDragOver={handleDragOver} onDrop={handleDrop}>
                     <div className="text">Arrastra tu zip aquí</div>
