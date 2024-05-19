@@ -1,12 +1,14 @@
 import express from 'express';
+import { Context } from '@jimmy/lib/context';
+import multer from 'multer';
 
-const app = express();
+const app = express.Router();
+const upload = multer({ storage: multer.memoryStorage() });
 app.use(express.json());
 
-app.get('/', (req, res) => {
+app.get('/api/upload', upload.single('file'), (req, res) => {
+    console.log(req.file);
     res.send("Hi");
 });
 
-app.listen(3000, () => {
-    console.log("listening on 3000");
-});
+export default app;
