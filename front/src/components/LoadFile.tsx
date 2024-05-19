@@ -20,7 +20,7 @@ const LoadFile: React.FC = () => {
             const formData = new FormData();
             formData.append('file', zipFile);
     
-            const response = await fetch('/api/load', {
+            const response = await fetch('/api/upload', {
               method: 'POST',
               body: formData,
             });
