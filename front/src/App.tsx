@@ -9,10 +9,9 @@ function App() {
       <div className='page'>
         <div className='header'>
           <div className='title'>Jimmy</div>
+          <div className='subtitle'>Tu debugger de confianza</div>
         </div>
-        <div className='content'>
-          <LoadFile/>
-        </div>
+        <LoadFile/>
       </div>
     </>
   )
