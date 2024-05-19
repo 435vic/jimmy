@@ -207,6 +207,11 @@
   /* outline: 2px solid red; */
 }
 
+.code-inline {
+  background: #5262a3;
+  border-radius: 0.2rem;
+}
+
 code {
   font-family: monospace;
 }
