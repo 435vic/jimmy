@@ -1,10 +1,11 @@
-*{
+* {
   padding: 0;
   margin: 0;
 
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   letter-spacing: 1px;
 }
+
 .page {
   display: flex;
   flex-direction: column;
@@ -13,6 +14,7 @@
   height: 100vh;
   position: relative;
 }
+
 .header {
   display: flex;
   flex-direction: row;
@@ -21,24 +23,31 @@
   width: 100vw;
   height: 80px;
   background: #0B2447;
-} .header div {
+}
+
+.header div {
   color: #A5D7E8;
 
   padding-left: 10px;
   letter-spacing: 5px;
   font-weight: 600;
-  user-select: none ;
-} .header .title {
+  user-select: none;
+}
+
+.header .title {
   font-size: 50px;
   padding-bottom: 10px;
   padding-left: 50px;
   margin-right: 20px;
-} .header .subtitle {
+}
+
+.header .subtitle {
   font-size: 20px;
   padding-top: 10px;
 }
+
 /* LoadFile */
-.content {  
+.content {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,6 +55,7 @@
 
   flex: 1;
 }
+
 .background-load {
   display: flex;
   justify-content: center;
@@ -55,11 +65,12 @@
   height: 100%;
   width: 100%;
   flex: 1;
-  
+
   background-image: url("./assets/LoadFile_background.png");
   background-size: cover;
   background-position: center;
 }
+
 .loadFile {
   height: 80%;
   aspect-ratio: 1.5/1;
@@ -76,7 +87,9 @@
   border: #0B2447 solid 5px;
 
   position: relative;
-} .loadFile .text {
+}
+
+.loadFile .text {
   text-align: center;
 
   font-size: 30px;
@@ -87,7 +100,9 @@
   position: absolute;
   top: 10%;
   user-select: none;
-} .loadFile .box {
+}
+
+.loadFile .box {
   width: 50%;
   height: 50%;
 
@@ -97,9 +112,12 @@
 
   border: #576CBC dashed 5px;
   border-radius: 50px;
-} .loadFile .upload-icon {
+}
+
+.loadFile .upload-icon {
   color: #0B2447;
 }
+
 /* ViewFile */
 .view {
   width: 100%;
@@ -107,23 +125,31 @@
   display: flex;
   flex-direction: row;
 }
+
 .view-box {
   width: 20vw;
   height: 100%;
   background-color: #19376D;
 
   color: #A5D7E8;
-} .view-box p {
+}
+
+.view-box p {
   padding: 5px 5px 2px 20px;
 }
+
 .file-view {
   flex: 1;
   background: #576CBC;
   display: flex;
   flex-direction: column;
-} .file-view pre {
+}
+
+.file-view pre {
   flex: 1;
-} .file-view .input-box {
+}
+
+.file-view .input-box {
   width: 100%;
   min-height: 15%;
   background: #0B2447;
@@ -131,7 +157,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-} .file-view .input {
+}
+
+.file-view .input {
   padding: 0 10px 0 10px;
   width: 85%;
   height: 80%;
@@ -145,7 +173,9 @@
   border: transparent solid 1px;
 
   color: #0B2447;
-} .file-view .send {
+}
+
+.file-view .send {
   height: 80%;
   aspect-ratio: 1/1;
 
@@ -153,9 +183,12 @@
   border-radius: 100%;
 
   margin-left: 10px;
-} .file-view .send:hover {
+}
+
+.file-view .send:hover {
   background: #19376D;
 }
+
 .debug {
   width: 20vw;
   height: 100%;

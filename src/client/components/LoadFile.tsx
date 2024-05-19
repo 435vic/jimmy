@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import ViewFile from './ViewFile';
+import JSZip from 'jszip';
 
-const LoadFile: React.FC = () => {
-    const [viewFile, setViewFile] = useState(false);
-    const [fileData, setFileData] = useState<any>(null);
+const LoadFile = () => {
+    const [contextFiles, setContextFiles] = useState<JSZip.JSZipObject[] | null>(null);
 
     function handleDragOver(event: React.DragEvent<HTMLDivElement>) {
         event.preventDefault();
@@ -17,19 +17,21 @@ const LoadFile: React.FC = () => {
     
         if (zipFile.size <= 10 * 1024 * 1024) {
           try {
+            const data = await zipFile.arrayBuffer();
+            const zip = new JSZip();
+            await zip.loadAsync(data);
+            setContextFiles(Object.values(zip.files))
+            console.log(Object.values(zip.files));
             const formData = new FormData();
             formData.append('file', zipFile);
     
-            const response = await fetch('/api/load', {
+            const response = await fetch('/api/upload', {
               method: 'POST',
               body: formData,
             });
     
             if (response.ok) {
-              const data = await response.json();
               console.log('Archivo .zip subido exitosamente');
-              setFileData(data);
-              setViewFile(true);
             } else {
               console.error('Error al subir el archivo .zip:', response.statusText);
             }
@@ -46,7 +48,7 @@ const LoadFile: React.FC = () => {
 
     return (
         <div className="content">
-            {viewFile ? <ViewFile fileData={fileData}/> : (
+            {contextFiles !== null ? <ViewFile fileData={contextFiles}/> : (
             <div className='background-load'>
                 <div className="loadFile" onDragOver={handleDragOver} onDrop={handleDrop}>
                     <div className="text">Arrastra tu zip aquí</div>

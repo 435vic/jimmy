@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import JSZip from "jszip";
 
 interface ViewFileProps {
-    fileData: any;
+    fileData: JSZip.JSZipObject[] | null;
 }
 
-const ViewFile: React.FC<ViewFileProps> = ({ fileData }) => {
+const ViewFile = ({ fileData }: ViewFileProps) => {
     const [inputValue, setInputValue] = useState("");
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,9 +34,12 @@ const ViewFile: React.FC<ViewFileProps> = ({ fileData }) => {
 
     return (
         <div className="view">
-            <div className="view-box"></div>
+            <div className="view-box">
+                {fileData?.map(f => <div className="file-path">
+                    <span>{f.name}</span><br/>
+                </div>)}
+            </div>
             <div className="file-view">
-                <pre>{JSON.stringify(fileData, null, 2)}</pre>
                 <div className="input-box">
                     <input className="input" type="text" value={inputValue} onChange={handleInputChange}></input>
                     <div className="send" onClick={handleSendClick}></div>

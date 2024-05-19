@@ -10,6 +10,8 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "Preserve",
+    "jsx": "preserve",
+    "allowImportingTsExtensions": true,
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
