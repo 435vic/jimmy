@@ -13,7 +13,7 @@ const ViewFile = ({ fileData }: ViewFileProps) => {
     };
     const handleSendClick = async () => {
         try {
-            const response = await fetch('/api/load', {
+            const response = await fetch('/api/ask', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
