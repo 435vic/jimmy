@@ -128,13 +128,13 @@
 }
 
 .view-box {
-  max-width: 20vw;
+  width: 18vw;
   height: 100%;
   background-color: #19376D;
 
   color: #A5D7E8;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow-x: scroll;
 }
 
 .view-box .file-path {
@@ -146,13 +146,16 @@
   flex: 1;
   background: #576CBC;
   display: flex;
+  width: 72vw;
   flex-direction: column;
 }
 
 .file-view .chat {
   flex: 1;
-  overflow-x: hidden;
   overflow-y: auto;
+  padding-left: 8rem;
+  padding-right: 8rem;
+  padding-top: 2rem;
 }
 
 .file-view .input-box {
@@ -193,4 +196,17 @@
 
 .file-view .send:hover {
   background: #19376D;
+}
+
+.code-block {
+  padding: 1rem 1rem;
+  background:#151929;
+  color: aliceblue;
+  font-family: monospace;
+  border-radius: 0.8rem;
+  /* outline: 2px solid red; */
+}
+
+code {
+  font-family: monospace;
 }

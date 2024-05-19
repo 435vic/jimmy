@@ -16,7 +16,7 @@ async function concatEntry(entry: NodeJS.ReadableStream) {
     return Buffer.concat(chunks);
 }
 
-type JimmyCompletionEvent =
+export type JimmyCompletionEvent =
     { type: "partial", content: string } |
     { type: "func", name: string, args: string } |
     { type: "stop", reason: string }
@@ -194,7 +194,7 @@ ${[...this.files.keys()].join('\n')}
             }
             console.log('Asking ChatGPT...');
             const stream = await this.openai.chat.completions.create({
-                model: 'gpt-4o',
+                model: 'gpt-3.5-turbo',
                 messages: this.messages,
                 stream: true,
                 tools: this.tools.map(t => t.json())

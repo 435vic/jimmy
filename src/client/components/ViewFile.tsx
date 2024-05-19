@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { socket } from '../socket';
+import Markdown from "react-markdown";
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
+import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 interface ViewFileProps {
     fileData: { name: string, data: Uint8Array }[] | null;
+    messages: string[],
 }
 
-const ViewFile = ({ fileData }: ViewFileProps) => {
+const ViewFile = ({ fileData, messages }: ViewFileProps) => {
     const [inputValue, setInputValue] = useState("");
 
     useEffect(() => {
@@ -22,7 +26,7 @@ const ViewFile = ({ fileData }: ViewFileProps) => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ data: inputValue })
+                body: JSON.stringify({ message: inputValue })
             });
 
             if (response.ok) {
@@ -44,7 +48,11 @@ const ViewFile = ({ fileData }: ViewFileProps) => {
                 </div>)}
             </div>
             <div className="file-view">
-                <div className="chat"></div>
+                <div className="chat">
+                    <Markdown>
+                    {messages[0]}
+                    </Markdown>
+                </div>
                 <div className="input-box">
                     <input className="input" type="text" value={inputValue} onChange={handleInputChange}></input>
                     <div className="send" onClick={handleSendClick}></div>
