@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import JSZip from 'jszip';
 import ViewFile from './ViewFile';
 
 const LoadFile: React.FC = () => {
@@ -8,7 +7,7 @@ const LoadFile: React.FC = () => {
     function handleDragOver(event: React.DragEvent<HTMLDivElement>) {
         event.preventDefault();
     }
-    function handleDrop(event: React.DragEvent<HTMLDivElement>) {
+    async function handleDrop(event: React.DragEvent<HTMLDivElement>) {
       event.preventDefault();
       const files = event.dataTransfer.files;
     
@@ -16,22 +15,29 @@ const LoadFile: React.FC = () => {
         const zipFile = files[0];
     
         if (zipFile.size <= 10 * 1024 * 1024) {
-          // upload to /api/load
-          const zip = new JSZip();
-          
-          zip.loadAsync(zipFile)
-            .then((zipContents) => {
-              // Procesa los archivos del .zip aquí
-              setViewFile(true);
-            })
-            .catch((error) => {
-              console.error('Error al cargar y descomprimir el archivo .zip:', error);
+          try {
+            const formData = new FormData();
+            formData.append('file', zipFile);
+    
+            const response = await fetch('/api/load', {
+              method: 'POST',
+              body: formData,
             });
+    
+            if (response.ok) {
+              console.log('Archivo .zip subido exitosamente');
+              setViewFile(true);
+            } else {
+              console.error('Error al subir el archivo .zip:', response.statusText);
+            }
+          } catch (error) {
+            console.error('Error al realizar la solicitud:', error);
+          }
         } else {
           console.error('El archivo .zip excede el tamaño máximo permitido (10 MB)');
         }
       } else {
-        console.error('Por favor, arrastra y suelta un archivo .zip');
+        console.error('El tipo de archivo debe ser un solo archivo .zip');
       }
     }
 
@@ -39,7 +45,7 @@ const LoadFile: React.FC = () => {
         <div className="content">
             {viewFile ? <ViewFile /> : (
             <div className='background-load'>
-                <div className="loadFile" id='drag-target' onDragOver={handleDragOver} onDrop={handleDrop}>
+                <div className="loadFile" onDragOver={handleDragOver} onDrop={handleDrop}>
                     <div className="text">Arrastra tu zip aquí</div>
                     <div className='box'>
                     <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" className="upload-icon" viewBox="0 0 16 16">
