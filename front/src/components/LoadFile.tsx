@@ -4,27 +4,32 @@ import ViewFile from './ViewFile';
 
 const LoadFile: React.FC = () => {
     const [viewFile, setViewFile] = useState(false);
-    const [fileNames, setFileNames] = useState<string[]>([]);
 
     function handleDragOver(event: React.DragEvent<HTMLDivElement>) {
         event.preventDefault();
     }
     function handleDrop(event: React.DragEvent<HTMLDivElement>) {
-        event.preventDefault();
-        const files = event.dataTransfer.files;
+      event.preventDefault();
+      const files = event.dataTransfer.files;
+    
       if (files.length === 1 && files[0].name.endsWith('.zip')) {
         const zipFile = files[0];
-        const zip = new JSZip();
     
-        zip.loadAsync(zipFile)
-          .then((zipContents) => {
-            // Procesa los archivos del .zip aquí
-
-            setViewFile(true);
-          })
-          .catch((error) => {
-            console.error('Error al cargar y descomprimir el archivo .zip:', error);
-          });
+        if (zipFile.size <= 10 * 1024 * 1024) {
+          // upload to /api/load
+          const zip = new JSZip();
+          
+          zip.loadAsync(zipFile)
+            .then((zipContents) => {
+              // Procesa los archivos del .zip aquí
+              setViewFile(true);
+            })
+            .catch((error) => {
+              console.error('Error al cargar y descomprimir el archivo .zip:', error);
+            });
+        } else {
+          console.error('El archivo .zip excede el tamaño máximo permitido (10 MB)');
+        }
       } else {
         console.error('Por favor, arrastra y suelta un archivo .zip');
       }
