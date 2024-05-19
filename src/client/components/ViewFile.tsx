@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { socket } from '../socket';
 import Markdown from "react-markdown";
-import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
-import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 interface ViewFileProps {
     fileData: { name: string, data: Uint8Array }[] | null;
@@ -49,7 +47,18 @@ const ViewFile = ({ fileData, messages }: ViewFileProps) => {
             </div>
             <div className="file-view">
                 <div className="chat">
-                    <Markdown>
+                    <Markdown
+                        components={{
+                            code: (props) => {
+                                const multiline = props.children?.toString().includes('/n');
+                                return multiline ? 
+                                    <div className="code-block">
+                                        <pre><code>{props.children}</code></pre>
+                                    </div> :
+                                    <code className="code-inline">{props.children}</code>
+                            }
+                        }}
+                    >
                     {messages[0]}
                     </Markdown>
                 </div>
